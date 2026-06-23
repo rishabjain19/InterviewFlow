@@ -24,6 +24,7 @@ const io = new Server(httpServer, {
 
 app.use((req, res, next) => { req.io = io; next() })
 
+app.get('/', (req, res) => res.json({ name:'InterviewFlow API', status:'ok', version:'1.0.0' }))
 app.get('/api/health', (req, res) => res.json({ status:'ok', timestamp:new Date().toISOString() }))
 app.use('/api', routes)
 app.use((req, res) => res.status(404).json({ error:`Route ${req.method} ${req.path} not found` }))
