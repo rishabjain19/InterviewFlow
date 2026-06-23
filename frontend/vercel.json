@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://interviewflow-1-anoe.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
