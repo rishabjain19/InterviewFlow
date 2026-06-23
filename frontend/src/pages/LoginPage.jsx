@@ -70,24 +70,8 @@ export default function LoginPage() {
       <div style={s.glowBlob2} />
 
       <div style={s.container}>
-        {/* Unified Top Branding with Modern Double-Chevron Flow Logo */}
+        {/* Unified Top Branding - Typography Only */}
         <div style={s.brandHeader} onClick={() => navigate("/")}>
-          <div style={s.logoContainer}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="34" height="34" fill="none">
-              <defs>
-                <linearGradient id="logo-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#7c6bff" />
-                  <stop offset="100%" stopColor="#a78bfa" />
-                </linearGradient>
-                <linearGradient id="logo-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#38bdf8" />
-                  <stop offset="100%" stopColor="#22d3a0" />
-                </linearGradient>
-              </defs>
-              <path d="M5 4l7 8-7 8" stroke="url(#logo-grad-1)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 2px 6px rgba(124, 107, 255, 0.35))" }} />
-              <path d="M12 4l7 8-7 8" stroke="url(#logo-grad-2)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 2px 6px rgba(56, 189, 248, 0.35))" }} />
-            </svg>
-          </div>
           <h1 style={s.brandTitle}>InterviewFlow</h1>
           <p style={s.brandSubtitle}>Interview Operations Platform</p>
         </div>
@@ -396,23 +380,15 @@ const s = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: 12,
+    gap: 8,
     marginBottom: 32,
     cursor: "pointer",
     textAlign: "center",
   },
-  logoContainer: {
-    width: 44,
-    height: 44,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "var(--accent)",
-  },
   brandTitle: {
     fontWeight: 800,
-    fontSize: 26,
-    letterSpacing: "-0.02em",
+    fontSize: 28,
+    letterSpacing: "-0.025em",
     color: "var(--text-1)",
     lineHeight: 1.1,
   },
