@@ -1,7 +1,12 @@
 # InterviewFlow
 
 A full-stack real-time interview cubicle queue management system built with the PERN stack. Replaces typical messy whiteboards and chaotic manual coordination during college placement drives with a sleek coordinator dashboard, live student queue tracking pages, and instant real-time synchronization.
-<img src="https://github.com/user-attachments/assets/f812cb9e-39ae-45d0-954d-b61f7c063e9f" width="48%" /> <img src="https://github.com/user-attachments/assets/5d97e2a4-2a83-41df-8d54-92a6a6f57a20" width="48%" />
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f812cb9e-39ae-45d0-954d-b61f7c063e9f" alt="Image 1" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/5d97e2a4-2a83-41df-8d54-92a6a6f57a20" alt="Image 2" width="100%"/></td>
+  </tr>
+</table>
 
 ## Demo
 
