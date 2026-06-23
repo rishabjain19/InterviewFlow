@@ -1,10 +1,7 @@
 import axios from 'axios'
 
-const BACKEND = import.meta.env.VITE_API_URL
-  || (import.meta.env.PROD ? 'https://interviewflow-1-anoe.onrender.com/api' : '/api')
-
 const api = axios.create({
-  baseURL: BACKEND,
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   timeout: 15000,
 })
 
