@@ -7,28 +7,28 @@ A full-stack real-time interview cubicle queue management system built with the 
 - **Live app:** [InterviewFlow on Vercel](https://interview-flow-five.vercel.app)
 - **Backend API:** [InterviewFlow API on Render](https://interviewflow-1-anoe.onrender.com)
 
-🔒 **Note:** Your credentials are completely secure. Passwords are hashed using the `bcryptjs` library before being stored in the database, and are never visible to the developer.
+**Note:** Your credentials are completely secure. Passwords are hashed using the `bcryptjs` library before being stored in the database, and are never visible to the developer.
 
 ---
 
 ## Features
 
-### 👤 Academic Placement Coordinator (APC) Portal
+### Academic Placement Coordinator (APC) Portal
 *   **Secure Access:** Select coordinator name from the registered dropdown list and authenticate securely using JWT (JSON Web Tokens).
 *   **Encrypted Passwords:** Passwords hashed with bcrypt (12 salt rounds) before storage.
 *   **Automatic Password Reset:** A simple "Forgot password" flow that resets the coordinator's password to `admin123`.
 
-### 📅 Session & Drive Setup
+### Session & Drive Setup
 *   **Session Initialization:** Coordinators can create multiple independent interview drive sessions.
 *   **Bulk Student Import:** Import student database (names, roll numbers, and phone numbers) in seconds via Excel (`.xlsx` or `.xls`) sheet upload.
 *   **Flexible Cubicle Configuration:** Set up customized interview booths (cubicles) with custom labels (e.g., "Google Tech 1", "HR Round 2") or default numerical ordering.
 
-### ⚡ Real-Time Queue Operations
+### Real-Time Queue Operations
 *   **Cubicle Queue Assignment:** Single-click assignment of waiting students to specific cubicle queues.
 *   **WebSocket Synchronization:** Driven by Socket.io. When a student completes an interview and is marked done, the queue advances, and the next student is automatically moved to `in_progress`.
 *   **Drag-Free Queue Reordering:** Coordinators can reorder student queues on the fly to adjust priorities.
 
-### 🎓 Live Student View
+### Live Student View
 *   **Zero-Login Roll Verification:** Students check in by simply entering their Roll Number on the session's join page.
 *   **Interactive Live Queue:** Real-time personal dashboard indicating queue placement (number of students ahead), cubicle assignment, and interview state.
 *   **Automatic Refresh:** Socket-driven updates notify the student instantly when they are called to enter the cubicle.
@@ -177,16 +177,16 @@ Open your browser and navigate to `http://localhost:5173`.
 ## Deployment
 
 ### Backend (Render)
-1.  Create a new **Web Service** on Render.
+1.  Create a new Web Service on Render.
 2.  Connect your GitHub repository.
-3.  Set the **Root Directory** to `backend`.
+3.  Set the Root Directory to `backend`.
 4.  Configure the environment variables: `DATABASE_URL`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `PORT`, `NODE_ENV`, `FRONTEND_URL`.
-5.  Set the **Build Command** to: `npm install`
-6.  Set the **Start Command** to: `npm start`
+5.  Set the Build Command to: `npm install`
+6.  Set the Start Command to: `npm start`
 
 ### Frontend (Vercel)
 1.  Import the repository into Vercel.
-2.  Set the **Root Directory** to `frontend`.
+2.  Set the Root Directory to `frontend`.
 3.  Configure the environment variables:
     *   Set `VITE_API_URL` (optional: when not using relative API paths).
 4.  Vercel will auto-detect Vite build commands (`npm run build` and output directory `dist`).
