@@ -10,13 +10,14 @@ const { errorHandler } = require('./middleware/errorHandler')
 const app = express()
 
 app.use(helmet())
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173', methods:['GET','POST','PUT','DELETE','OPTIONS'], allowedHeaders:['Content-Type','Authorization'], credentials:true }))
+const FRONTEND_ORIGIN = (process.env.FRONTEND_URL || 'http://localhost:5173').replace(/\/$/, '')
+app.use(cors({ origin: FRONTEND_ORIGIN, methods:['GET','POST','PUT','DELETE','OPTIONS'], allowedHeaders:['Content-Type','Authorization'], credentials:true }))
 app.use(express.json({ limit:'10mb' }))
 app.use(express.urlencoded({ extended:true }))
 
 const httpServer = http.createServer(app)
 const io = new Server(httpServer, {
-  cors: { origin: process.env.FRONTEND_URL || 'http://localhost:5173', methods:['GET','POST'] },
+  cors: { origin: FRONTEND_ORIGIN, methods:['GET','POST'] },
   transports: ['websocket'],
   pingInterval: 25000,
   pingTimeout: 60000,

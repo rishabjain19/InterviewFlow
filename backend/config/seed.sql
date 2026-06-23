@@ -1,5 +1,5 @@
--- Password for ALL accounts: Drive@2025
--- Hash generated with bcrypt rounds=12
+-- Password for ALL accounts: admin123
+-- Hash generated with bcrypt rounds=12 (bcrypt hash of "admin123")
 
 INSERT INTO apc_users (name, email, password_hash) VALUES
 ('Rahul Sharma',    'rahul.sharma@college.edu',    '$2a$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'),
