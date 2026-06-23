@@ -64,92 +64,31 @@ export default function LoginPage() {
 
   return (
     <div style={s.page}>
-      <div style={s.bg1} />
-      <div style={s.bg2} />
-      <div style={s.left} className="hide-mobile">
-        <div style={s.brand} onClick={() => navigate("/")}>
+      {/* Decorative Grid Overlay & Light Blobs */}
+      <div style={s.gridBg} />
+      <div style={s.glowBlob} />
+      <div style={s.glowBlob2} />
+
+      <div style={s.container}>
+        {/* Unified Top Branding */}
+        <div style={s.brandHeader} onClick={() => navigate("/")}>
           <div style={s.logoIcon}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
           </div>
-          <span style={s.logoText}>InterviewFlow</span>
-        </div>
-        <div style={s.leftContent}>
-          <span style={s.leftEyebrow}>Interview Operations Platform</span>
-          <h2 style={s.leftTitle}>Manage your campus drives with precision</h2>
-          <p style={s.leftSubtitle}>
-            Coordinate APC workflows, candidate movement, and live queue updates from
-            one streamlined, real-time dashboard.
-          </p>
-          <div style={s.features}>
-            {[
-              "Real-time queue management & ordering",
-              "Bulk student import from Excel templates",
-              "Live interview cubicle occupancy tracking",
-              "Instant room alerts driven by WebSockets",
-            ].map((f) => (
-              <div key={f} style={s.featureItem}>
-                <span style={s.featureCheck}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <span style={s.featureText}>{f}</span>
-              </div>
-            ))}
-          </div>
-
-          <div style={s.mockCard} className="card glass">
-            <div style={s.mockHeader}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span className="dot dot-pulse" style={{ background: 'var(--green)', width: 8, height: 8 }} />
-                <span style={s.mockHeaderTitle}>Live Coordinator Stream</span>
-              </div>
-              <span style={s.mockHeaderBadge}>Session: Active</span>
-            </div>
-            <div style={s.mockBody}>
-              <div style={s.mockRow}>
-                <span style={s.mockLabel}>Cubicle 1 (Tech)</span>
-                <span style={s.mockStudent}>Aarav Mehta</span>
-                <span className="badge badge-active" style={{ fontSize: 10, padding: "2px 8px" }}>Interviewing</span>
-              </div>
-              <div style={s.mockRow}>
-                <span style={s.mockLabel}>Cubicle 2 (Tech)</span>
-                <span style={s.mockStudent}>Sneha Roy</span>
-                <span className="badge badge-active" style={{ fontSize: 10, padding: "2px 8px" }}>Interviewing</span>
-              </div>
-              <div style={s.mockRow}>
-                <span style={s.mockLabel}>Cubicle 3 (HR)</span>
-                <span style={s.mockStudent}>Rohan Sharma</span>
-                <span className="badge badge-waiting" style={{ fontSize: 10, padding: "2px 8px" }}>Up Next</span>
-              </div>
-            </div>
-            <div style={s.mockFooter}>
-              <span style={{ fontSize: 11, color: 'var(--text-3)' }}>Queue Sync • Real-Time WebSockets</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div style={s.right}>
-        {/* Mobile Header */}
-        <div style={s.mobileBrand} className="show-mobile-flex" onClick={() => navigate("/")}>
-          <div style={s.logoIcon}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
-          </div>
-          <span style={s.logoText}>InterviewFlow</span>
+          <h1 style={s.brandTitle}>InterviewFlow</h1>
+          <p style={s.brandSubtitle}>Interview Operations Platform</p>
         </div>
 
+        {/* Centralized Login Card */}
         <div style={s.card} className="card glass grad-border animate-scale">
           {mode === "login" ? (
             <>
               <div style={s.cardHeader}>
-                <h1 style={s.title}>Sign in to Dashboard</h1>
+                <h2 style={s.title}>Sign in to Dashboard</h2>
                 <p style={s.subtitle}>
-                  Select your coordinator profile and enter your access password
+                  Choose your coordinator profile and enter your access password
                 </p>
               </div>
               <form onSubmit={handleSubmit} style={s.form}>
@@ -226,7 +165,7 @@ export default function LoginPage() {
                     <line x1="12" y1="16" x2="12" y2="12"></line>
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
                   </svg>
-                  <span style={s.noticeText}>To test login, select any APC profile & use password <strong style={{ color: "var(--text-1)", fontFamily: "var(--mono)" }}>admin123</strong></span>
+                  <span style={s.noticeText}>To test, select any APC profile & use password <strong style={{ color: "var(--text-1)", fontFamily: "var(--mono)" }}>admin123</strong></span>
                 </div>
 
                 <button
@@ -252,7 +191,7 @@ export default function LoginPage() {
           ) : (
             <>
               <div style={s.cardHeader}>
-                <h1 style={s.title}>Reset Password</h1>
+                <h2 style={s.title}>Reset Password</h2>
                 <p style={s.subtitle}>
                   Select your name to reset your coordinator profile password to default
                 </p>
@@ -372,6 +311,17 @@ export default function LoginPage() {
             </>
           )}
         </div>
+
+        {/* Minimal Feature List Footer */}
+        <div style={s.featureFooter}>
+          <span style={s.featureItem}>Real-time Queue Management</span>
+          <span style={s.featureDot}>•</span>
+          <span style={s.featureItem}>Excel Import</span>
+          <span style={s.featureDot}>•</span>
+          <span style={s.featureItem}>Live Occupancy</span>
+          <span style={s.featureDot}>•</span>
+          <span style={s.featureItem}>WebSocket Sync</span>
+        </div>
       </div>
     </div>
   );
@@ -381,219 +331,108 @@ const s = {
   page: {
     minHeight: "100vh",
     display: "flex",
-    flexWrap: "wrap",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     position: "relative",
     overflow: "hidden",
-    background: "linear-gradient(180deg, rgba(6,6,9,0.98) 0%, rgba(10,10,16,1) 100%)",
+    background: "#060609",
+    padding: "40px 20px",
   },
-  bg1: {
-    position: "fixed",
+  gridBg: {
+    position: "absolute",
     inset: 0,
-    background: "radial-gradient(circle 900px at 0% 0%, rgba(124,107,255,0.09) 0%, transparent 100%)",
+    backgroundImage: `
+      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)
+    `,
+    backgroundSize: "45px 45px",
+    backgroundPosition: "center center",
     pointerEvents: "none",
+    maskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%)",
+    WebkitMaskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%)",
   },
-  bg2: {
-    position: "fixed",
-    inset: 0,
-    background: "radial-gradient(circle 800px at 100% 100%, rgba(34,211,160,0.04) 0%, transparent 100%)",
+  glowBlob: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "600px",
+    height: "600px",
+    background: "radial-gradient(circle, rgba(124,107,255,0.06) 0%, transparent 70%)",
     pointerEvents: "none",
+    zIndex: 0,
   },
-  left: {
-    flex: "1 1 540px",
+  glowBlob2: {
+    position: "absolute",
+    top: "30%",
+    left: "40%",
+    width: "400px",
+    height: "400px",
+    background: "radial-gradient(circle, rgba(34,211,160,0.02) 0%, transparent 70%)",
+    pointerEvents: "none",
+    zIndex: 0,
+  },
+  container: {
+    width: "100%",
+    maxWidth: "460px",
     display: "flex",
     flexDirection: "column",
-    padding: "50px 60px",
-    background: "rgba(13, 13, 20, 0.4)",
-    borderRight: "1px solid var(--border-1)",
-    position: "relative",
+    alignItems: "center",
     zIndex: 1,
-    backdropFilter: "blur(4px)",
   },
-  brand: {
+  brandHeader: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     gap: 12,
-    marginBottom: "auto",
+    marginBottom: 32,
     cursor: "pointer",
-    width: "fit-content",
+    textAlign: "center",
   },
   logoIcon: {
-    width: 32,
-    height: 32,
+    width: 44,
+    height: 44,
     background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)",
-    borderRadius: 8,
+    borderRadius: 12,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     color: "#fff",
-    boxShadow: "0 0 16px var(--accent-glow)",
+    boxShadow: "0 0 24px var(--accent-glow)",
   },
-  logoText: {
-    fontWeight: 700,
-    fontSize: 19,
-    letterSpacing: "-0.015em",
-    color: "var(--text-1)",
-  },
-  leftContent: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    maxWidth: 480,
-    padding: "40px 0",
-  },
-  leftEyebrow: {
-    display: "inline-flex",
-    marginBottom: 16,
-    color: "var(--accent)",
-    fontSize: 11.5,
-    fontWeight: 600,
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-  },
-  leftTitle: {
-    fontSize: "clamp(26px, 3vw, 36px)",
+  brandTitle: {
     fontWeight: 800,
-    letterSpacing: "-0.025em",
-    marginBottom: 16,
+    fontSize: 26,
+    letterSpacing: "-0.02em",
     color: "var(--text-1)",
-    lineHeight: 1.2,
+    lineHeight: 1.1,
   },
-  leftSubtitle: {
-    color: "var(--text-2)",
-    fontSize: 15.5,
-    lineHeight: 1.6,
-    marginBottom: 32,
-  },
-  features: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 18,
-    marginBottom: 40,
-  },
-  featureItem: {
-    display: "flex",
-    alignItems: "center",
-    gap: 14,
-  },
-  featureCheck: {
-    width: 20,
-    height: 20,
-    borderRadius: 6,
-    background: "var(--green-dim)",
-    color: "var(--green)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-    boxShadow: "0 0 10px rgba(34,211,160,0.05)",
-  },
-  featureText: {
-    fontSize: 14.5,
-    color: "var(--text-2)",
-    fontWeight: 500,
-  },
-  mockCard: {
-    background: "rgba(18, 18, 28, 0.45)",
-    border: "1px solid var(--border-1)",
-    borderRadius: 14,
-    padding: 20,
-    boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-    width: "100%",
-  },
-  mockHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottom: "1px solid var(--border-1)",
-    paddingBottom: 12,
-    marginBottom: 12,
-  },
-  mockHeaderTitle: {
+  brandSubtitle: {
+    color: "var(--text-3)",
     fontSize: 12.5,
     fontWeight: 600,
-    color: "var(--text-1)",
-  },
-  mockHeaderBadge: {
-    fontSize: 10.5,
-    color: "var(--text-3)",
-    background: "var(--bg-3)",
-    padding: "2px 8px",
-    borderRadius: 99,
-    border: "1px solid var(--border-1)",
-  },
-  mockBody: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-  },
-  mockRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    fontSize: 12.5,
-    padding: "4px 0",
-  },
-  mockLabel: {
-    color: "var(--text-3)",
-    fontWeight: 500,
-    width: "110px",
-  },
-  mockStudent: {
-    color: "var(--text-2)",
-    fontWeight: 600,
-    marginRight: "auto",
-    paddingLeft: 8,
-  },
-  mockFooter: {
-    borderTop: "1px solid var(--border-1)",
-    paddingTop: 10,
-    marginTop: 12,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  right: {
-    flex: "1 1 420px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "40px 30px",
-    position: "relative",
-    zIndex: 1,
-  },
-  mobileBrand: {
-    alignItems: "center",
-    gap: 10,
-    marginBottom: 32,
-    cursor: "pointer",
-    display: "none",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
   },
   card: {
     width: "100%",
-    maxWidth: "460px",
     padding: "44px 40px",
-    borderRadius: 20,
-    height: "fit-content",
-    minHeight: "auto",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.4)",
-    background: "rgba(13,13,20,0.65)",
+    borderRadius: 22,
+    boxShadow: "0 30px 60px rgba(0, 0, 0, 0.45)",
+    background: "rgba(13,13,20,0.7)",
     backdropFilter: "blur(24px)",
     border: "1px solid var(--border-2)",
   },
   cardHeader: {
-    marginBottom: 26,
+    marginBottom: 28,
+    textAlign: "center",
   },
   title: {
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: 800,
-    letterSpacing: "-0.025em",
+    letterSpacing: "-0.02em",
     marginBottom: 8,
-    lineHeight: 1.15,
     color: "var(--text-1)",
   },
   subtitle: {
@@ -681,4 +520,26 @@ const s = {
     padding: "12px 16px",
     marginTop: 16,
   },
+  featureFooter: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: 10,
+    marginTop: 32,
+    opacity: 0.4,
+    transition: "opacity 0.2s ease",
+    ":hover": {
+      opacity: 0.75
+    }
+  },
+  featureItem: {
+    fontSize: 12,
+    color: "var(--text-2)",
+    fontWeight: 500,
+  },
+  featureDot: {
+    fontSize: 10,
+    color: "var(--text-4)",
+  }
 };
