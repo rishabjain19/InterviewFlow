@@ -35,7 +35,20 @@ export default function StudentJoinPage() {
       <div style={s.card} className="card animate-scale">
         <div style={s.header}>
           <div style={s.logoWrap}>
-            <div style={s.logo}>IF</div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="38" height="38" fill="none">
+              <defs>
+                <linearGradient id="logo-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#7c6bff" />
+                  <stop offset="100%" stopColor="#a78bfa" />
+                </linearGradient>
+                <linearGradient id="logo-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#38bdf8" />
+                  <stop offset="100%" stopColor="#22d3a0" />
+                </linearGradient>
+              </defs>
+              <path d="M5 4l7 8-7 8" stroke="url(#logo-grad-1)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 2px 6px rgba(124, 107, 255, 0.35))" }} />
+              <path d="M12 4l7 8-7 8" stroke="url(#logo-grad-2)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 2px 6px rgba(56, 189, 248, 0.35))" }} />
+            </svg>
           </div>
           <h1 style={s.title}>InterviewFlow</h1>
           <p style={s.subtitle}>Enter your roll number to check in</p>
@@ -79,7 +92,6 @@ const s = {
   card: { width:'100%', maxWidth:420, padding:40, position:'relative', zIndex:1 },
   header: { textAlign:'center', marginBottom:32 },
   logoWrap: { display:'flex', justifyContent:'center', marginBottom:16 },
-  logo: { width:48, height:48, background:'linear-gradient(135deg, var(--accent), var(--teal))', borderRadius:12, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, fontSize:16, color:'#fff', boxShadow:'0 0 24px var(--accent-glow)' },
   title: { fontSize:22, fontWeight:700, marginBottom:6, letterSpacing:'-0.02em' },
   subtitle: { fontSize:14, color:'var(--text-3)' },
   form: { display:'flex', flexDirection:'column', gap:16 },

@@ -70,11 +70,22 @@ export default function LoginPage() {
       <div style={s.glowBlob2} />
 
       <div style={s.container}>
-        {/* Unified Top Branding */}
+        {/* Unified Top Branding with Modern Double-Chevron Flow Logo */}
         <div style={s.brandHeader} onClick={() => navigate("/")}>
-          <div style={s.logoIcon}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          <div style={s.logoContainer}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="34" height="34" fill="none">
+              <defs>
+                <linearGradient id="logo-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#7c6bff" />
+                  <stop offset="100%" stopColor="#a78bfa" />
+                </linearGradient>
+                <linearGradient id="logo-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#38bdf8" />
+                  <stop offset="100%" stopColor="#22d3a0" />
+                </linearGradient>
+              </defs>
+              <path d="M5 4l7 8-7 8" stroke="url(#logo-grad-1)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 2px 6px rgba(124, 107, 255, 0.35))" }} />
+              <path d="M12 4l7 8-7 8" stroke="url(#logo-grad-2)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 2px 6px rgba(56, 189, 248, 0.35))" }} />
             </svg>
           </div>
           <h1 style={s.brandTitle}>InterviewFlow</h1>
@@ -390,16 +401,13 @@ const s = {
     cursor: "pointer",
     textAlign: "center",
   },
-  logoIcon: {
+  logoContainer: {
     width: 44,
     height: 44,
-    background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)",
-    borderRadius: 12,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: "#fff",
-    boxShadow: "0 0 24px var(--accent-glow)",
+    color: "var(--accent)",
   },
   brandTitle: {
     fontWeight: 800,
