@@ -64,6 +64,64 @@ export default function LoginPage() {
 
   return (
     <div style={s.page}>
+      {/* Injecting clean CSS overrides locally for Autofill and Focus states */}
+      <style>{`
+        .custom-input {
+          width: 100%;
+          padding: 14px 16px;
+          background: #12121c !important;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          color: #f0f0ff !important;
+          font-size: 15px;
+          outline: none;
+          transition: all 0.2s ease;
+        }
+        .custom-input:focus {
+          border-color: #7c6bff;
+          box-shadow: 0 0 0 3px rgba(124, 107, 255, 0.15);
+          background: #151522 !important;
+        }
+        .custom-input:-webkit-autofill,
+        .custom-input:-webkit-autofill:hover, 
+        .custom-input:-webkit-autofill:focus, 
+        .custom-input:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px #12121c inset !important;
+          -webkit-text-fill-color: #f0f0ff !important;
+          caret-color: #f0f0ff !important;
+          border-radius: 12px;
+        }
+        .custom-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 14px 24px;
+          border-radius: 12px;
+          font-size: 15px;
+          font-weight: 600;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          width: 100%;
+          cursor: pointer;
+          background: linear-gradient(135deg, #7c6bff 0%, #6355e8 100%);
+          color: #ffffff;
+          box-shadow: 0 4px 20px rgba(124, 107, 255, 0.25);
+        }
+        .custom-btn:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 24px rgba(124, 107, 255, 0.35);
+          background: linear-gradient(135deg, #8b7dff 0%, #6d60ed 100%);
+        }
+        .custom-btn:active {
+          transform: translateY(1px);
+        }
+        .custom-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          transform: none;
+        }
+      `}</style>
+
       {/* Decorative Grid Overlay & Light Blobs */}
       <div style={s.gridBg} />
       <div style={s.glowBlob} />
@@ -73,7 +131,6 @@ export default function LoginPage() {
         {/* Unified Top Branding - Typography Only */}
         <div style={s.brandHeader} onClick={() => navigate("/")}>
           <h1 style={s.brandTitle}>InterviewFlow</h1>
-          <p style={s.brandSubtitle}>Interview Operations Platform</p>
         </div>
 
         {/* Centralized Login Card */}
@@ -88,21 +145,21 @@ export default function LoginPage() {
               </div>
               <form onSubmit={handleSubmit} style={s.form}>
                 <div>
-                  <label>APC PROFILE</label>
+                  <label style={s.label}>COORDINATOR PROFILE</label>
                   {loadingApcs ? (
                     <div
                       className="skeleton"
-                      style={{ height: 46, borderRadius: 10 }}
+                      style={{ height: 48, borderRadius: 12 }}
                     />
                   ) : (
                     <select
-                      className="input input-lg"
+                      className="custom-input"
                       value={selectedApc}
                       onChange={(e) => setSelectedApc(e.target.value)}
                       required
-                      style={s.selectField}
+                      style={{ appearance: "none" }}
                     >
-                      <option value="">Select your APC name…</option>
+                      <option value="">Select your name…</option>
                       {apcs.map((a) => (
                         <option key={a.id} value={a.id}>
                           {a.name}
@@ -112,8 +169,8 @@ export default function LoginPage() {
                   )}
                 </div>
                 <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <label>PASSWORD</label>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                    <label style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--text-3)", letterSpacing: "0.05em" }}>PASSWORD</label>
                     <button
                       type="button"
                       style={s.forgotLinkSmall}
@@ -124,7 +181,7 @@ export default function LoginPage() {
                   </div>
                   <div style={{ position: "relative" }}>
                     <input
-                      className="input input-lg"
+                      className="custom-input"
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter password"
                       value={password}
@@ -164,10 +221,10 @@ export default function LoginPage() {
                 </div>
 
                 <button
-                  className="btn btn-primary btn-lg"
+                  className="custom-btn"
                   type="submit"
                   disabled={loading}
-                  style={{ width: "100%", marginTop: 8 }}
+                  style={{ marginTop: 8 }}
                 >
                   {loading ? (
                     <>
@@ -229,8 +286,8 @@ export default function LoginPage() {
                     </span>
                   </div>
                   <button
-                    className="btn btn-primary btn-lg"
-                    style={{ marginTop: 24, width: "100%" }}
+                    className="custom-btn"
+                    style={{ marginTop: 24 }}
                     onClick={() => {
                       setMode("login");
                       setResetDone(false);
@@ -243,19 +300,19 @@ export default function LoginPage() {
               ) : (
                 <form onSubmit={handleForgotPassword} style={s.form}>
                   <div>
-                    <label>YOUR NAME</label>
+                    <label style={s.label}>YOUR NAME</label>
                     {loadingApcs ? (
                       <div
                         className="skeleton"
-                        style={{ height: 46, borderRadius: 10 }}
+                        style={{ height: 48, borderRadius: 12 }}
                       />
                     ) : (
                       <select
-                        className="input input-lg"
+                        className="custom-input"
                         value={selectedApc}
                         onChange={(e) => setSelectedApc(e.target.value)}
                         required
-                        style={s.selectField}
+                        style={{ appearance: "none" }}
                       >
                         <option value="">Select your name…</option>
                         {apcs.map((a) => (
@@ -277,10 +334,10 @@ export default function LoginPage() {
                     </span>
                   </div>
                   <button
-                    className="btn btn-primary btn-lg"
+                    className="custom-btn"
                     type="submit"
                     disabled={loading || !selectedApc}
-                    style={{ width: "100%", marginTop: 8 }}
+                    style={{ marginTop: 8 }}
                   >
                     {loading ? (
                       <>
@@ -306,17 +363,6 @@ export default function LoginPage() {
             </>
           )}
         </div>
-
-        {/* Minimal Feature List Footer */}
-        <div style={s.featureFooter}>
-          <span style={s.featureItem}>Real-time Queue Management</span>
-          <span style={s.featureDot}>•</span>
-          <span style={s.featureItem}>Excel Import</span>
-          <span style={s.featureDot}>•</span>
-          <span style={s.featureItem}>Live Occupancy</span>
-          <span style={s.featureDot}>•</span>
-          <span style={s.featureItem}>WebSocket Sync</span>
-        </div>
       </div>
     </div>
   );
@@ -338,10 +384,10 @@ const s = {
     position: "absolute",
     inset: 0,
     backgroundImage: `
-      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)
+      linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px)
     `,
-    backgroundSize: "45px 45px",
+    backgroundSize: "50px 50px",
     backgroundPosition: "center center",
     pointerEvents: "none",
     maskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%)",
@@ -352,19 +398,19 @@ const s = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "600px",
-    height: "600px",
-    background: "radial-gradient(circle, rgba(124,107,255,0.06) 0%, transparent 70%)",
+    width: "700px",
+    height: "700px",
+    background: "radial-gradient(circle, rgba(124,107,255,0.05) 0%, transparent 70%)",
     pointerEvents: "none",
     zIndex: 0,
   },
   glowBlob2: {
     position: "absolute",
-    top: "30%",
-    left: "40%",
-    width: "400px",
-    height: "400px",
-    background: "radial-gradient(circle, rgba(34,211,160,0.02) 0%, transparent 70%)",
+    top: "20%",
+    left: "30%",
+    width: "500px",
+    height: "500px",
+    background: "radial-gradient(circle, rgba(34,211,160,0.015) 0%, transparent 70%)",
     pointerEvents: "none",
     zIndex: 0,
   },
@@ -380,68 +426,64 @@ const s = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: 8,
-    marginBottom: 32,
+    marginBottom: 36,
     cursor: "pointer",
     textAlign: "center",
   },
   brandTitle: {
     fontWeight: 800,
-    fontSize: 28,
-    letterSpacing: "-0.025em",
+    fontSize: 32,
+    letterSpacing: "-0.03em",
     color: "var(--text-1)",
     lineHeight: 1.1,
-  },
-  brandSubtitle: {
-    color: "var(--text-3)",
-    fontSize: 12.5,
-    fontWeight: 600,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
   },
   card: {
     width: "100%",
     padding: "44px 40px",
-    borderRadius: 22,
-    boxShadow: "0 30px 60px rgba(0, 0, 0, 0.45)",
-    background: "rgba(13,13,20,0.7)",
+    borderRadius: 24,
+    boxShadow: "0 30px 60px rgba(0, 0, 0, 0.5)",
+    background: "rgba(10, 10, 16, 0.8)",
     backdropFilter: "blur(24px)",
-    border: "1px solid var(--border-2)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
   },
   cardHeader: {
-    marginBottom: 28,
+    marginBottom: 32,
     textAlign: "center",
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 800,
     letterSpacing: "-0.02em",
-    marginBottom: 8,
+    marginBottom: 10,
     color: "var(--text-1)",
   },
   subtitle: {
-    fontSize: 13.5,
+    fontSize: 14,
     color: "var(--text-3)",
-    lineHeight: 1.5,
+    lineHeight: 1.55,
   },
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: 20,
+    gap: 24,
   },
-  selectField: {
-    background: "var(--bg-3)",
+  label: {
+    display: "block",
+    fontSize: 12,
+    fontWeight: 600,
+    color: "var(--text-3)",
+    letterSpacing: "0.05em",
+    marginBottom: 8,
   },
   forgotLinkSmall: {
     fontSize: 12,
-    fontWeight: 500,
+    fontWeight: 600,
     color: "var(--accent)",
     background: "none",
     border: "none",
     cursor: "pointer",
-    padding: "0 0 6px 0",
-    transition: "color 0.2s ease, opacity 0.2s",
-    opacity: 0.85,
+    transition: "color 0.2s ease",
+    padding: 0,
   },
   eyeButton: {
     position: "absolute",
@@ -462,12 +504,12 @@ const s = {
   noticeBox: {
     display: "flex",
     gap: 10,
-    padding: "12px 14px",
-    background: "var(--accent-dim)",
-    border: "1px solid rgba(124, 107, 255, 0.15)",
-    borderRadius: 10,
-    fontSize: 12.5,
-    lineHeight: 1.45,
+    padding: "14px 16px",
+    background: "rgba(124, 107, 255, 0.06)",
+    border: "1px solid rgba(124, 107, 255, 0.12)",
+    borderRadius: 12,
+    fontSize: 13,
+    lineHeight: 1.5,
     color: "var(--text-2)",
   },
   noticeText: {
@@ -504,26 +546,4 @@ const s = {
     padding: "12px 16px",
     marginTop: 16,
   },
-  featureFooter: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    gap: 10,
-    marginTop: 32,
-    opacity: 0.4,
-    transition: "opacity 0.2s ease",
-    ":hover": {
-      opacity: 0.75
-    }
-  },
-  featureItem: {
-    fontSize: 12,
-    color: "var(--text-2)",
-    fontWeight: 500,
-  },
-  featureDot: {
-    fontSize: 10,
-    color: "var(--text-4)",
-  }
 };
