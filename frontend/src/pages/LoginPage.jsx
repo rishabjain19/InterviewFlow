@@ -13,16 +13,29 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingApcs, setLoadingApcs] = useState(true);
+  const [apcError, setApcError] = useState(false);
   const [mode, setMode] = useState("login");
   const [resetDone, setResetDone] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
+  const fetchApcs = () => {
+    setLoadingApcs(true);
+    setApcError(false);
     api
       .get("/auth/apc-list")
-      .then((r) => setApcs(r.data.apcs || []))
-      .catch(() => setApcs([]))
+      .then((r) => {
+        setApcs(r.data.apcs || []);
+        setApcError(false);
+      })
+      .catch(() => {
+        setApcs([]);
+        setApcError(true);
+      })
       .finally(() => setLoadingApcs(false));
+  };
+
+  useEffect(() => {
+    fetchApcs();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -64,7 +77,7 @@ export default function LoginPage() {
 
   return (
     <div style={s.page}>
-      {/* Injecting clean CSS overrides locally for Autofill and Focus states */}
+      {/* Global responsive + component CSS */}
       <style>{`
         .custom-input {
           width: 100%;
@@ -76,6 +89,7 @@ export default function LoginPage() {
           font-size: 15px;
           outline: none;
           transition: all 0.2s ease;
+          box-sizing: border-box;
         }
         .custom-input:focus {
           border-color: #7c6bff;
@@ -83,8 +97,8 @@ export default function LoginPage() {
           background: #151522 !important;
         }
         .custom-input:-webkit-autofill,
-        .custom-input:-webkit-autofill:hover, 
-        .custom-input:-webkit-autofill:focus, 
+        .custom-input:-webkit-autofill:hover,
+        .custom-input:-webkit-autofill:focus,
         .custom-input:-webkit-autofill:active {
           -webkit-box-shadow: 0 0 0 30px #12121c inset !important;
           -webkit-text-fill-color: #f0f0ff !important;
@@ -106,6 +120,7 @@ export default function LoginPage() {
           background: linear-gradient(135deg, #7c6bff 0%, #6355e8 100%);
           color: #ffffff;
           box-shadow: 0 4px 20px rgba(124, 107, 255, 0.25);
+          border: none;
         }
         .custom-btn:hover {
           transform: translateY(-1px);
@@ -120,6 +135,77 @@ export default function LoginPage() {
           cursor: not-allowed;
           transform: none;
         }
+        .retry-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 10px 20px;
+          border-radius: 10px;
+          font-size: 13px;
+          font-weight: 600;
+          background: rgba(124,107,255,0.12);
+          border: 1px solid rgba(124,107,255,0.25);
+          color: #7c6bff;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .retry-btn:hover {
+          background: rgba(124,107,255,0.2);
+          border-color: rgba(124,107,255,0.4);
+        }
+
+        /* ── Responsive Breakpoints ── */
+
+        /* Tablet (≤ 1024px) */
+        @media (max-width: 1024px) {
+          .login-page-inner {
+            max-width: 440px !important;
+            padding: 32px 16px !important;
+          }
+          .login-card {
+            padding: 36px 32px !important;
+          }
+          .login-brand-title {
+            font-size: 28px !important;
+          }
+        }
+
+        /* Mobile (≤ 480px) */
+        @media (max-width: 480px) {
+          .login-page-inner {
+            max-width: 100% !important;
+            width: 100% !important;
+            padding: 24px 16px !important;
+          }
+          .login-card {
+            padding: 28px 20px !important;
+            border-radius: 18px !important;
+          }
+          .login-brand-title {
+            font-size: 24px !important;
+            margin-bottom: 20px !important;
+          }
+          .login-brand-header {
+            margin-bottom: 24px !important;
+          }
+          .login-card-title {
+            font-size: 20px !important;
+          }
+          .login-card-subtitle {
+            font-size: 13px !important;
+          }
+          .login-card-header {
+            margin-bottom: 24px !important;
+          }
+          .custom-input {
+            font-size: 16px !important; /* Prevents iOS zoom on focus */
+            padding: 13px 14px !important;
+          }
+          .custom-btn {
+            font-size: 14px !important;
+            padding: 13px 20px !important;
+          }
+        }
       `}</style>
 
       {/* Decorative Grid Overlay & Light Blobs */}
@@ -127,19 +213,19 @@ export default function LoginPage() {
       <div style={s.glowBlob} />
       <div style={s.glowBlob2} />
 
-      <div style={s.container}>
-        {/* Unified Top Branding - Typography Only */}
-        <div style={s.brandHeader} onClick={() => navigate("/")}>
-          <h1 style={s.brandTitle}>InterviewFlow</h1>
+      <div style={s.container} className="login-page-inner">
+        {/* Top Branding */}
+        <div style={s.brandHeader} className="login-brand-header" onClick={() => navigate("/")}>
+          <h1 style={s.brandTitle} className="login-brand-title">InterviewFlow</h1>
         </div>
 
-        {/* Centralized Login Card */}
-        <div style={s.card} className="card glass grad-border animate-scale">
+        {/* Login Card */}
+        <div style={s.card} className="card glass grad-border animate-scale login-card">
           {mode === "login" ? (
             <>
-              <div style={s.cardHeader}>
-                <h2 style={s.title}>Sign in to Dashboard</h2>
-                <p style={s.subtitle}>
+              <div style={s.cardHeader} className="login-card-header">
+                <h2 style={s.title} className="login-card-title">Sign in to Dashboard</h2>
+                <p style={s.subtitle} className="login-card-subtitle">
                   Choose your coordinator profile and enter your access password
                 </p>
               </div>
@@ -151,6 +237,24 @@ export default function LoginPage() {
                       className="skeleton"
                       style={{ height: 48, borderRadius: 12 }}
                     />
+                  ) : apcError ? (
+                    <div style={s.errorBox}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--red)", flexShrink: 0 }}>
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                      </svg>
+                      <span style={{ fontSize: 13, color: "var(--text-2)", flex: 1 }}>
+                        Could not load profiles. Server may be waking up.
+                      </span>
+                      <button type="button" className="retry-btn" onClick={fetchApcs}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="23 4 23 10 17 10"></polyline>
+                          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                        Retry
+                      </button>
+                    </div>
                   ) : (
                     <select
                       className="custom-input"
@@ -217,13 +321,13 @@ export default function LoginPage() {
                     <line x1="12" y1="16" x2="12" y2="12"></line>
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
                   </svg>
-                  <span style={s.noticeText}>To test, select any APC profile & use password <strong style={{ color: "var(--text-1)", fontFamily: "var(--mono)" }}>admin123</strong></span>
+                  <span style={s.noticeText}>To test, select any APC profile &amp; use password <strong style={{ color: "var(--text-1)", fontFamily: "var(--mono)" }}>admin123</strong></span>
                 </div>
 
                 <button
                   className="custom-btn"
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || apcError}
                   style={{ marginTop: 8 }}
                 >
                   {loading ? (
@@ -242,9 +346,9 @@ export default function LoginPage() {
             </>
           ) : (
             <>
-              <div style={s.cardHeader}>
-                <h2 style={s.title}>Reset Password</h2>
-                <p style={s.subtitle}>
+              <div style={s.cardHeader} className="login-card-header">
+                <h2 style={s.title} className="login-card-title">Reset Password</h2>
+                <p style={s.subtitle} className="login-card-subtitle">
                   Select your name to reset your coordinator profile password to default
                 </p>
               </div>
@@ -306,6 +410,20 @@ export default function LoginPage() {
                         className="skeleton"
                         style={{ height: 48, borderRadius: 12 }}
                       />
+                    ) : apcError ? (
+                      <div style={s.errorBox}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--red)", flexShrink: 0 }}>
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span style={{ fontSize: 13, color: "var(--text-2)", flex: 1 }}>
+                          Could not load profiles. Server may be waking up.
+                        </span>
+                        <button type="button" className="retry-btn" onClick={fetchApcs}>
+                          Retry
+                        </button>
+                      </div>
                     ) : (
                       <select
                         className="custom-input"
@@ -336,7 +454,7 @@ export default function LoginPage() {
                   <button
                     className="custom-btn"
                     type="submit"
-                    disabled={loading || !selectedApc}
+                    disabled={loading || !selectedApc || apcError}
                     style={{ marginTop: 8 }}
                   >
                     {loading ? (
@@ -514,6 +632,16 @@ const s = {
   },
   noticeText: {
     color: "var(--text-2)",
+  },
+  errorBox: {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    padding: "12px 14px",
+    background: "rgba(248, 113, 113, 0.06)",
+    border: "1px solid rgba(248, 113, 113, 0.15)",
+    borderRadius: 12,
+    flexWrap: "wrap",
   },
   backToSignInButton: {
     fontSize: 13,
